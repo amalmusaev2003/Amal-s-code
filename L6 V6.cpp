@@ -1,5 +1,5 @@
 ﻿/*Вариант-6.
-Дана целочисленная матрица {Aij}i=1...n;j=1..n , n<=100. Если в матрице есть еще один элемент, равный ее максимальному элементу, 
+Дана целочисленная матрица {Aij}i=1...n;j=1..n , n<=100. Если в матрице есть еще один элемент, равный ее максимальному элементу,
 упорядочить строки матрицы по невозрастанию количества простых чисел среди элементов строк.
 */
 #include <iostream>
@@ -9,13 +9,13 @@
 #include <fstream>
 using namespace std;
 void Read(int i, int j, int mas[100][100])
-{ 
+{
     for (int k = 0; k < i; k++)
     {
         for (int m = 0; m < j; m++)
         {
             mas[k][m] = rand() % 100 + 1;
-           
+
         }
     }
 }
@@ -37,7 +37,7 @@ void Write(int i, int j, int mas[100][100])
     out.close();
 }
 
-int MAX(int& maxx,int i, int j, int mas[100][100])
+int MAX(int& maxx, int i, int j, int mas[100][100])
 {
     for (int k = 0; k < i; k++)
     {
@@ -60,7 +60,7 @@ bool KolMAX(int maxx, int i, int j, int mas[100][100])//количество м�
     {
         for (int m = 0; m < j; m++)
         {
-            if (mas[k][m]== maxx)
+            if (mas[k][m] == maxx)
             {
                 count++;
             }
@@ -79,7 +79,7 @@ bool KolMAX(int maxx, int i, int j, int mas[100][100])//количество м�
 
 bool Prostoe(int n)
 {
-    int x=0;//количество делителей
+    int x = 0;//количество делителей
     if (n == 2 || n == 3)
     {
         return true;
@@ -101,13 +101,13 @@ bool Prostoe(int n)
     }
 }
 
-int ProstvStr(int i, int j, int mas[100][100],int kolvo[100])//количество простых в строках
+int ProstvStr(int i, int j, int mas[100][100], int kolvo[100])//количество простых в строках
 {
-    int count=0;
+    int count = 0;
 
     for (int k = 0; k < i; k++)
     {
-        
+
         for (int m = 0; m < j; m++)
         {
             if (Prostoe(mas[k][m]))
@@ -115,14 +115,14 @@ int ProstvStr(int i, int j, int mas[100][100],int kolvo[100])//количест�
                 count++;
             }
         }
-        kolvo[k] = count;    
-        cout << "В " << k+1 << " строке - " << count << " простых" << endl;
+        kolvo[k] = count;
+        cout << "В " << k + 1 << " строке - " << count << " простых" << endl;
         count = 0;
     }
     return kolvo[100];
 }
 
-void Sort(int k, int m, int mas[100][100],int kolvo[100])
+void Sort(int k, int m, int mas[100][100], int kolvo[100])
 {
     int x;
     for (int i = 0; i < k; i++)
@@ -130,7 +130,7 @@ void Sort(int k, int m, int mas[100][100],int kolvo[100])
         for (int j = i + 1; j < m; j++)
         {
             if (kolvo[i] < kolvo[j])
-            {  
+            {
                 swap(kolvo[i], kolvo[j]);
                 swap(mas[i], mas[j]);
             }
@@ -149,11 +149,11 @@ int main()
     int i = rand() % 100 + 1;
     int j = rand() % 100 + 1;
     int s[100][100];
-    int maxx=0;
+    int maxx = 0;
     int kolvo[100];
     Read(i, j, s);
-    MAX(maxx,i, j, s);
-    if (KolMAX(maxx,i, j, s))
+    MAX(maxx, i, j, s);
+    if (KolMAX(maxx, i, j, s))
     {
         ProstvStr(i, j, s, kolvo);
         Sort(i, j, s, kolvo);
@@ -162,5 +162,6 @@ int main()
     else
     {
         cout << "Лишь один максимум: Не судьба" << endl;
-    } 
+    }
 }
+
